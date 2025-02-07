@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     container: {
         overflow: 'hidden',
         borderRadius: 36,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginBottom: 24
     },
     innerContainer: {
         alignItems: 'center',
