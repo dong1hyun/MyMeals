@@ -5,21 +5,26 @@ import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import { useContext, useLayoutEffect } from "react";
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../store/context/favorites-context";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
+// import { FavoritesContext } from "../store/context/favorites-context";
 
 function MealDetailScreen({ route, navigation }) {
-    const favoriteMealsCtx = useContext(FavoritesContext);
-    const { ids, addFavorite, removeFavorite } = favoriteMealsCtx;
-
+    // const favoriteMealsCtx = useContext(FavoritesContext);
+    // const { ids, addFavorite, removeFavorite } = favoriteMealsCtx;
+    const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+    const dispatch = useDispatch();
     const id = route.params.mealId;
     const selectedMeal = MEALS.find((meal) => meal.id === id);
-    const mealIsFavorite = ids.includes(id);
+    const mealIsFavorite = favoriteMealIds.includes(id);
 
     function changeFavoriteStatusHandler() {
         if (mealIsFavorite) {
-            removeFavorite(id);
+            // removeFavorite(id);
+            dispatch(removeFavorite(id))
         } else {
-            addFavorite(id);
+            // addFavorite(id);
+            dispatch(addFavorite(id))
         }
     }
     useLayoutEffect(() => {
